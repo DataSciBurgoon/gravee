@@ -1,4 +1,4 @@
-package application;
+package mil.army.usace.bctt.gravee;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,8 +10,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
-
-import mil.army.usace.bctt.gravee.DoseResponse;
 
 public class Parser {
 	
@@ -42,7 +40,7 @@ public class Parser {
 				else{
 					TreeMap<Double, Double> tmDoseResponseData = new TreeMap<Double, Double>();
 					for(int j = 1; j < entries.length; j++){
-						tmDoseResponseData.put(doses.get(j), new Double(Double.parseDouble(entries[j])));
+						tmDoseResponseData.put(doses.get(j-1), new Double(Double.parseDouble(entries[j])));
 					}
 					DoseResponse doseResponse = new DoseResponse(entries[0], tmDoseResponseData);
 					alDoseResponses.add(doseResponse);

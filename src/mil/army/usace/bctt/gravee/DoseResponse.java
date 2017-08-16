@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import application.Point;
-
 //This holds the dose-response data and the POD
 
 public class DoseResponse {
@@ -23,7 +21,7 @@ public class DoseResponse {
 	private void transformPoints(){
 		for(Map.Entry<Double, Double> entry : tmDoseData.entrySet()){
 			double dose = entry.getKey().doubleValue();
-			double response = entry.getKey().doubleValue();
+			double response = entry.getValue().doubleValue();
 			Point drPoint = new Point(dose, response);
 			alPoints.add(drPoint);
 		}

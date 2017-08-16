@@ -10,8 +10,8 @@ import java.util.TreeMap;
 
 import org.junit.Test;
 
-import application.Parser;
 import mil.army.usace.bctt.gravee.DoseResponse;
+import mil.army.usace.bctt.gravee.Parser;
 
 public class TestParser {
 
