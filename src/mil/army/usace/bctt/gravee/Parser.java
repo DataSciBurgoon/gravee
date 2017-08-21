@@ -15,7 +15,7 @@ public class Parser {
 	
 	private File inputFile;
 	
-	private ArrayList<DoseResponse> alDoseResponses = new ArrayList<DoseResponse>();
+	private HashMap<String, ArrayList> hmIdentifierDR = new HashMap<String, ArrayList>();
 	
 	public Parser(File inputFile){
 		this.inputFile = inputFile;
@@ -29,6 +29,8 @@ public class Parser {
 		
 		try(BufferedReader reader = Files.newBufferedReader(filepath, StandardCharsets.UTF_8)){
 			int i = 0;
+			String identifier = "";
+			ArrayList<DoseResponse> alDoseResponses = new ArrayList<DoseResponse>();;
 			while((line = reader.readLine()) != null){
 				String[] entries = line.split("\t");
 				if(i == 0){
@@ -38,13 +40,38 @@ public class Parser {
 					}
 				}
 				else{
-					TreeMap<Double, Double> tmDoseResponseData = new TreeMap<Double, Double>();
-					for(int j = 1; j < entries.length; j++){
-						tmDoseResponseData.put(doses.get(j-1), new Double(Double.parseDouble(entries[j])));
+					if(identifier.equals("")){
+						TreeMap<Double, Double> tmDoseResponseData = new TreeMap<Double, Double>();
+						for(int j = 1; j < entries.length; j++){
+							tmDoseResponseData.put(doses.get(j-1), new Double(Double.parseDouble(entries[j])));
+						}
+						DoseResponse doseResponse = new DoseResponse(entries[0], tmDoseResponseData);
+						alDoseResponses.add(doseResponse);
+						identifier = entries[0];
 					}
-					DoseResponse doseResponse = new DoseResponse(entries[0], tmDoseResponseData);
-					alDoseResponses.add(doseResponse);
+					else if(entries[0].equals(identifier)){
+						TreeMap<Double, Double> tmDoseResponseData = new TreeMap<Double, Double>();
+						for(int j = 1; j < entries.length; j++){
+							tmDoseResponseData.put(doses.get(j-1), new Double(Double.parseDouble(entries[j])));
+						}
+						DoseResponse doseResponse = new DoseResponse(entries[0], tmDoseResponseData);
+						alDoseResponses.add(doseResponse);
+					}
+					else{
+						alDoseResponses.trimToSize();
+						hmIdentifierDR.put(identifier, alDoseResponses);
+						alDoseResponses = new ArrayList<DoseResponse>();
+						identifier = entries[0];
+						TreeMap<Double, Double> tmDoseResponseData = new TreeMap<Double, Double>();
+						for(int j = 1; j < entries.length; j++){
+							tmDoseResponseData.put(doses.get(j-1), new Double(Double.parseDouble(entries[j])));
+						}
+						DoseResponse doseResponse = new DoseResponse(entries[0], tmDoseResponseData);
+						alDoseResponses.add(doseResponse);
+					}
 				}
+				alDoseResponses.trimToSize();
+				hmIdentifierDR.put(identifier, alDoseResponses);
 			}
 		}
 		catch(IOException e){
@@ -53,8 +80,8 @@ public class Parser {
 		}
 	}
 	
-	public ArrayList<DoseResponse> getDoseResponseData(){
-		return this.alDoseResponses;
+	public HashMap<String, ArrayList> getDoseResponseData(){
+		return this.hmIdentifierDR;
 	}
 
 }

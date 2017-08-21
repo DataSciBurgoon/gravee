@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ TestDoseResponsePoints.class, TestMaxCurvatureSearch.class, TestParser.class })
+@SuiteClasses({ TestDoseResponsePoints.class, TestMaxCurvatureSearch.class, TestParser.class, TestSplineMetaRegression.class })
 public class AllTests {
 
 }
