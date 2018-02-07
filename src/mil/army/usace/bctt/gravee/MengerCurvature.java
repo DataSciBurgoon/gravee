@@ -47,6 +47,7 @@ public class MengerCurvature {
 	}
 	
 	public double getPOD(){
+		//System.out.println("pod: " + this.pod);
 		return this.pod;
 	}
 	

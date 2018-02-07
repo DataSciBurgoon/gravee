@@ -19,6 +19,7 @@ public class Interpolator {
 	
 	private int interpolationSize = 0;
 	private double[] doses;
+	private double[] logDoses;
 	private double[] responses;
 	private double[] modeledDoses = new double[interpolationSize];
 	private double[] modeledResponses = new double[interpolationSize];
@@ -29,7 +30,15 @@ public class Interpolator {
 		this.doses = doses;
 		this.responses = responses;
 		this.interpolationSize = interpolationSize;
+		this.logDoses = new double[doses.length];
+		//takeLogDoses();
 		calcLoess();
+	}
+	
+	private void takeLogDoses(){
+		for(int i = 0; i < doses.length; i++){
+			logDoses[i] = Math.log10(doses[i]);
+		}
 	}
 	
 	private double getMax(double[] inputArray){ 
@@ -54,10 +63,14 @@ public class Interpolator {
 	  } 
 	
 	private void calcLoess(){
-		AkimaSplineInterpolator asi = new AkimaSplineInterpolator();
+		//AkimaSplineInterpolator asi = new AkimaSplineInterpolator();
+		LoessInterpolator loess = new LoessInterpolator(0.75, 4);
 		try{
-			PolynomialSplineFunction psf = asi.interpolate(doses, responses);
+			//PolynomialSplineFunction psf = asi.interpolate(doses, responses);
+			PolynomialSplineFunction psf = loess.interpolate(doses, responses);
 			modeledDoses = interpolate(getMin(doses), getMax(doses), interpolationSize);
+			/*PolynomialSplineFunction psf = asi.interpolate(logDoses, responses);
+			modeledDoses = interpolate(getMin(logDoses), getMax(logDoses), interpolationSize);*/
 			double maxResponse = maxResponse();
 			modeledResponses = predictVals(psf, modeledDoses, maxResponse);
 		}
@@ -120,11 +133,11 @@ public class Interpolator {
 	    return array;
 	}
 	
-	public double[] getLoessDoses(){
+	public double[] getInterpolatedDoses(){
 		return this.modeledDoses;
 	}
 	
-	public double[] getLoessResponses(){
+	public double[] getInterpolatedResponses(){
 		return this.modeledResponses;
 	}
 

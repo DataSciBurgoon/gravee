@@ -19,12 +19,19 @@ public class TestMaxCurvatureSearch {
 	
 	@Test
 	public void test() {
-		Parser parser = new Parser(new File("src/test_data.txt"));
+		/*Parser parser = new Parser(new File("src/test_data.txt"));
 		HashMap<String, ArrayList> hmDoseResponseData = parser.getDoseResponseData();
 		ArrayList<DoseResponse> alDoseResponseData = hmDoseResponseData.get("blah x");
 		DoseResponse doseResponse = alDoseResponseData.get(0);
 		MengerCurvature mc = new MengerCurvature(doseResponse.getDRPoints());
-		assertEquals(50.0, mc.getPOD(), 0.001);
+		assertEquals(50.0, mc.getPOD(), 0.001);*/
+		
+		Parser parser = new Parser(new File("src/test_data3.txt"));
+		HashMap<String, ArrayList> hmDoseResponseData = parser.getDoseResponseData();
+		ArrayList<DoseResponse> alDoseResponseData = hmDoseResponseData.get("x");
+		DoseResponse doseResponse = alDoseResponseData.get(0);
+		MengerCurvature mc = new MengerCurvature(doseResponse.getDRPoints());
+		assertEquals(1.2, mc.getPOD(), 0.001);
 	}
 
 }
