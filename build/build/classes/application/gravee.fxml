@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="989.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EventHandlerController">
+   <children>
+      <ImageView fitHeight="89.0" fitWidth="107.0" layoutX="791.0" layoutY="654.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../USACE_logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="89.0" fitWidth="79.0" layoutX="904.0" layoutY="646.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../logos_whitebg.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="14.0" layoutY="563.0" prefHeight="166.0" prefWidth="498.0" style="-fx-background-color: &quot;white&quot;;">
+         <children>
+            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input File Specs:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tab-delimited text file. Should look something like this:" />
+            <Text layoutX="36.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assay/Gene Name &gt;&gt; Dose 1 &gt;&gt; Dose 2 &gt;&gt; Dose 3 &gt;&gt; Dose 4 &gt;&gt; Dose 5" />
+            <Text layoutX="36.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assay/Gene Name &gt;&gt; Dose 1 &gt;&gt; Dose 2 &gt;&gt; Dose 3 &gt;&gt; Dose 4 &gt;&gt; Dose 5" />
+            <Text layoutX="36.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assay/Gene Name &gt;&gt; Dose 1 &gt;&gt; Dose 2 &gt;&gt; Dose 3 &gt;&gt; Dose 4 &gt;&gt; Dose 5" />
+            <Text layoutX="14.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please see the example_data.txt file for an example (you can open and save these in Excel)" wrappingWidth="468.20703125" />
+         </children>
+      </Pane>
+      <Text layoutX="528.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version 1.0, 1 September 2017" />
+      <Text layoutX="528.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text layoutX="528.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact: Lyle D. Burgoon, Ph.D. (lyle.d.burgoon@usace.army.mil)" />
+      <Button fx:id="fileOpenButton" layoutX="28.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleFileOpenButtonAction" text="Data File" />
+      <Label fx:id="fileNameLabel" layoutX="114.0" layoutY="397.0" prefHeight="17.0" prefWidth="165.0" text="filename" />
+      <Label layoutX="16.0" layoutY="345.0" text="Get your PODs in 2 easy steps!" />
+      <Label layoutX="16.0" layoutY="370.0" text="1) Choose your input data file" />
+      <Label layoutX="14.0" layoutY="435.0" text="2) Press Go!" />
+      <Button fx:id="submitButton" layoutX="28.0" layoutY="459.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Go!" />
+      <Separator layoutX="359.0" layoutY="2.0" orientation="VERTICAL" prefHeight="560.0" prefWidth="13.0" />
+      <TableView fx:id="podTable" layoutX="367.0" layoutY="137.0" prefHeight="418.0" prefWidth="609.0">
+        <columns>
+          <TableColumn fx:id="columnIdentifier" prefWidth="271.0" text="Identifier" />
+          <TableColumn fx:id="columnPod5" prefWidth="140.0" text="POD-5%" />
+          <TableColumn fx:id="columnPod50" minWidth="0.0" prefWidth="105.0" text="POD-50%" />
+          <TableColumn fx:id="columnPod95" prefWidth="88.0" text="POD-95%" />
+        </columns>
+      </TableView>
+      <Text layoutX="372.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Point of Departure Results">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="331.0" fitWidth="360.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../gravee.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="372.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GRAVEE calculates the distribution of predicted PODs using bootstrapping. " wrappingWidth="468.2070255955914" />
+      <Text layoutX="387.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POD-5%: " underline="true" wrappingWidth="63.00000613927841" />
+      <Text layoutX="388.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POD-50%:" underline="true" wrappingWidth="75.99999010562897" />
+      <Text layoutX="387.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POD-95%: " underline="true" wrappingWidth="468.2070255955914" />
+      <Text layoutX="450.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5% of the distribution is below this value." />
+      <Text layoutX="464.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is the median of the POD distribution (the most likely POD value given the data)" wrappingWidth="374.4072265625" />
+      <Text layoutX="464.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="95% of the distribution is below this value." />
+   </children>
+</AnchorPane>

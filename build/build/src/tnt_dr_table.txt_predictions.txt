@@ -1,0 +1,2 @@
+Node Name	Node Active Probability	Node Inactive Probability
+ACSM2B	0.6	3.1	4.8
